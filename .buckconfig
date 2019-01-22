@@ -6,7 +6,4 @@
 
 [cxx]
   should_remap_host_platform = true
-
-[cxx#linux-x86_64]
-  should_remap_host_platform = true
-  cxxppflags = -DTBB_OS=Linux -DNDEBUG=1 -D__TBB_BUILD=1 -DO_ITT_NOTIFY -DUSE_PTHREAD
+  cxxppflags = -DNDEBUG=1 -D__TBB_BUILD=1 -DO_ITT_NOTIFY -DUSE_PTHREAD
