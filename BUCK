@@ -51,6 +51,9 @@ cxx_library(
     ('linux.*', { 'version_string.ver': ':version-string-linux' }),
     ('macos.*', { 'version_string.ver': ':version-string-macos' }),
   ],
+  preprocessor_flags = [
+    "-D__TBBMALLOC_BUILD=1" 
+  ],
   srcs = glob([
     'src/tbbmalloc/**/*.cpp',
   ]),
@@ -97,6 +100,9 @@ cxx_library(
   ]),
   headers = subdir_glob([
     ('src', '**/*.h'),
+    ('src/old/include', '**/*.h'),
+    ('src/rml/include', '**/*.h'),
+    ('src', 'tbb/*.cpp'),
   ]),
   platform_headers = [
     ('linux.*', { 'version_string.ver': ':version-string-linux' }),
@@ -104,9 +110,9 @@ cxx_library(
   ],
   srcs = glob([
     'src/tbb/**/*.cpp',
-    # 'src/tbbproxy/**/*.cpp',
-    # 'src/tbbmalloc/**/*.cpp',
-  ]),
+    'src/old/**/*.cpp',
+    'src/rml/**/*.cpp',
+  ], exclude=["src/**/test/**/*.cpp", "src/old/test_*.cpp"]),
   deps = [
     ':tbbmalloc',
     ':tbbproxy',
