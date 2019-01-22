@@ -1,0 +1,10 @@
+cxx_binary(
+  name = 'square',
+  srcs = [
+    'gen_input.cpp',
+    'square.cpp',
+  ],
+  deps = [
+    '//:tbb',
+  ],
+)

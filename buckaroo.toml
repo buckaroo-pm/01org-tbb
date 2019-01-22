@@ -1,0 +1,13 @@
+targets = [ "//:tbb" ]
+
+[[dependency]]
+package = "github.com/buckaroo-pm/host-dl"
+version = "branch=master"
+
+[[dependency]]
+package = "github.com/buckaroo-pm/host-pthread"
+version = "branch=master"
+
+[[dependency]]
+package = "github.com/buckaroo-pm/host-rt"
+version = "branch=master"

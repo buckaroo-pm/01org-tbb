@@ -1,0 +1,164 @@
+load('//:merge_dicts.bzl', 'merge_dicts')
+load('//:subdir_glob.bzl', 'subdir_glob')
+
+cxx_library(
+  name = "tbbmalloc_proxy",
+  header_namespace= '',
+  compiler_flags = ["-fPIC","-flifetime-dse=1","-m64","-mrtm"],
+  preprocessor_flags = ["-DDO_ITT_NOTIFY","-DUSE_PTHREAD","-D__TBBMALLOC_BUILD=1"],
+  srcs = glob([
+    "build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release/*"
+  ], excludes = [
+    "build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release/version_string.ver"
+  ]),
+  exported_linker_flags = ["-ldl","-pthread","-lrt","-lbuild/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release/libtbbmalloc.so"],
+  deps = [],
+  visibility = []
+)
+
+cxx_library(
+  name = 'tbb_debug',
+  header_namespace = '',
+  compiler_flags = ["-fPIC","-flifetime-dse=1","-m64","-mrtm"],
+  preprocessor_flags = ["-DTBB_USE_DEBUG","-DDO_ITT_NOTIFY","-DUSE_PTHREAD","-D__TBB_BUILD=1"],
+  exported_headers = merge_dicts(subdir_glob([
+    ("build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug", "**/*.ver")
+  ]), {
+    'version_string.ver': ':gen-build-linux_intel64_gcc_cc8_libc2-27_kernel4-18-0_debug-version_string-ver',
+  }),
+  srcs =
+  [ (file, []) for file in glob(
+      ["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug/*"],
+      excludes=["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug/version_string.ver"]
+   )]
+   + [
+
+  ],
+  linker_flags = [],
+  exported_linker_flags = ["-ldl","-pthread","-lrt"],
+  deps = [],
+  visibility = []
+)
+
+cxx_library(
+  name = "tbb",
+  header_namespace= '',
+  compiler_flags = ["-fPIC","-flifetime-dse=1","-m64","-mrtm"],
+  preprocessor_flags = ["-DDO_ITT_NOTIFY","-DUSE_PTHREAD","-D__TBB_BUILD=1"],
+  exported_headers = merge_dicts(subdir_glob([
+    ("build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release", "**/*.ver")
+  ]), {
+    'version_string.ver': ':gen-build-linux_intel64_gcc_cc8_libc2-27_kernel4-18-0_release-version_string-ver',
+  }),
+  srcs =
+  [ (file, []) for file in glob(
+      ["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release/*"],
+      excludes=["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release/version_string.ver"]
+   )]
+   + [
+
+  ],
+  linker_flags = [],
+  exported_linker_flags = ["-ldl","-pthread","-lrt"],
+  deps = [],
+  visibility = []
+)
+
+cxx_library(
+  name = "tbbmalloc_debug",
+  header_namespace= '',
+  compiler_flags = ["-fno-rtti","-fno-exceptions","-fPIC","-flifetime-dse=1","-m64","-mrtm"],
+  preprocessor_flags = ["-DTBB_USE_DEBUG","-DDO_ITT_NOTIFY","-DUSE_PTHREAD","-D__TBBMALLOC_BUILD=1"],
+  exported_headers = merge_dicts(subdir_glob([
+    ("build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug", "**/*.ver")
+  ]), {
+    'version_string.ver': ':gen-build-linux_intel64_gcc_cc8_libc2-27_kernel4-18-0_debug-version_string-ver',
+  }),
+  headers = merge_dicts(subdir_glob([
+
+  ]), {
+
+  }),
+
+  srcs =
+  [ (file, []) for file in glob(
+      ["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug/*"],
+      excludes=["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug/version_string.ver"]
+   )]
+   + [
+
+  ],
+  linker_flags = [],
+  exported_linker_flags = ["-ldl","-pthread","-lrt"],
+  deps = [],
+  visibility = []
+)
+
+cxx_library(
+  name = "tbbmalloc_proxy_debug",
+  header_namespace= '',
+  compiler_flags = ["-fPIC","-flifetime-dse=1","-m64","-mrtm"],
+  preprocessor_flags = ["-DTBB_USE_DEBUG","-DDO_ITT_NOTIFY","-DUSE_PTHREAD","-D__TBBMALLOC_BUILD=1"],
+  exported_headers = merge_dicts(subdir_glob([
+
+  ]), {
+
+  }),
+  headers = merge_dicts(subdir_glob([
+
+  ]), {
+
+  }),
+
+  srcs =
+  [ (file, []) for file in glob(
+      ["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug/*"],
+      excludes=["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug/version_string.ver"]
+   )]
+   + [
+
+  ],
+  linker_flags = [],
+  exported_linker_flags = ["-ldl","-pthread","-lrt","-lbuild/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_debug/libtbbmalloc_debug.so"],
+  deps = [],
+  visibility = []
+)
+
+cxx_library(
+  name = "tbbmalloc",
+  header_namespace= '',
+  compiler_flags = ["-fno-rtti","-fno-exceptions","-fPIC","-flifetime-dse=1","-m64","-mrtm"],
+  preprocessor_flags = ["-DDO_ITT_NOTIFY","-DUSE_PTHREAD","-D__TBBMALLOC_BUILD=1"],
+  exported_headers = merge_dicts(subdir_glob([
+    ("build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release", "**/*.ver")
+  ]), {
+    'version_string.ver': ':gen-build-linux_intel64_gcc_cc8_libc2-27_kernel4-18-0_release-version_string-ver',
+  }),
+
+  srcs =
+  [ (file, []) for file in glob(
+      ["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release/*"],
+      excludes=["build/linux_intel64_gcc_cc8_libc2.27_kernel4.18.0_release/version_string.ver"]
+   )]
+   + [
+
+  ],
+  linker_flags = [],
+  exported_linker_flags = ["-ldl","-pthread","-lrt"],
+  deps = [],
+  visibility = []
+)
+
+# genrule(
+#     name = 'gen-build-linux_intel64_gcc_cc8_libc2-27_kernel4-18-0_debug-libtbbmalloc_debug-so',
+#     out = 'libtbbmalloc_debug.so',
+#     srcs = glob(["./*"]),
+#     cmd = 'echo "INPUT (libtbbmalloc_debug.so.2)" > libtbbmalloc_debug.so',
+#   )
+
+# genrule(
+#     name = 'gen-build-linux_intel64_gcc_cc8_libc2-27_kernel4-18-0_release-libtbbmalloc-so',
+#     out = 'libtbbmalloc.so',
+#     srcs = glob(["./*"]),
+#     cmd = 'echo "INPUT (libtbbmalloc.so.2)" > libtbbmalloc.so',
+#   )
