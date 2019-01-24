@@ -14,6 +14,7 @@ addons:
       - facebook/fb
     packages:
       - buck
+      - libomp
 
 os:
   - linux
